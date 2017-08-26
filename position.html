@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .con1{
+            position: relative;
+            height: 500px;
+        }
+        .subcon1, .subcon2, .subcon3, .subcon4{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+        }
+        .subcon1{
+            background: red;
+        }
+        .subcon2{
+            background: green;
+            left: 100px;
+        }
+        .subcon3{
+            background:blue;
+            left: 200px;
+        }
+        .subcon4{
+            background:black;
+            left: 300px;
+        }
+        .subspan{
+            position: absolute;
+            z-index: 10;
+            width: 30px;
+            height: 30px;
+            left: 10px;
+            top: 10px;
+            background: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="con1">
+        <div class="subcon1">
+            <span class="subspan">1111</span>
+        </div>
+        <div class="subcon2">2</div>
+        <div class="subcon3">3</div>
+        <div class="subcon4">4</div>
+    </div>
+</body>
+</html>

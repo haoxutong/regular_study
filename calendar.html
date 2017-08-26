@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>饼图test</title>
+    <link rel="stylesheet" type="text/css" href="regular-ui.default.min.css">
+    <link rel="stylesheet" type="text/css" href="regular-ui-chart.min.css">
+</head>
+
+<body>
+    <div id="app">123</div>
+    <script type="text/javascript" src="regular.min.js"></script>
+    <script type="text/javascript" src="regular-ui.js"></script>
+<script id="tem" type="text/regular">
+        <div class="g-row">
+            <div class="g-col"><calendar ref="customCalendar"  minDate={minDate}/></div>
+        </div>
+</script>
+<script type="text/javascript">
+    var _app = document.getElementById('app');
+    var component = new RGUI.Component({
+        template: "#tem",
+        data: {
+            minDate: 1499011200000,
+            // maxDate: new Date(+new Date + 7*24*3600*1000)
+        },
+        init: function() {
+            // 只能选择星期一、三、五
+            // this.$refs.customCalendar.isOutOfRange = function(date) {
+            //     return !(date.getDay()%2);
+            // }
+            // this.$refs.customCalendar.$update();
+        }
+    });
+    component.$inject(_app);
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>饼图test</title>
+    <link rel="stylesheet" type="text/css" href="regular-ui.default.min.css">
+    <link rel="stylesheet" type="text/css" href="regular-ui-chart.min.css">
+</head>
+
+<body>
+    <div id="app">123</div>
+    <script type="text/javascript" src="regular.min.js"></script>
+    <script type="text/javascript" src="regular-ui.min.js"></script>
+    <script type="text/javascript" src="regular-ui-chart.js"></script>
+<script id="tem" type="text/regular">
+        <lineChart
+            xAxis={@({ key: 'week' ,name:'11'})}
+            yAxis={@({ min: 0, name:'个' })}
+            series={@([{ key: 'number' }])}
+            data={data} >
+                <div>
+                    <button>1111</button>
+                    <button>2222</button>
+                </div>
+            </lineChart>
+</script>
+<script type="text/javascript">
+    var _app = document.getElementById('app');
+    var component = new RGUI.Component({
+            template: "#tem",
+            data: {
+                data: [
+                    { week: '星期一', number: 150 },
+                    { week: '星期二', number: 300 },
+                    { week: '星期三', number: 28 },
+                    { week: '星期四', number: 200 },
+                    { week: '星期五', number: 74 },
+                    { week: '星期六', number: 532 },
+                    { week: '星期日', number: 420 },
+                    { week: '星期一', number: 150 },
+                    { week: '星期二', number: 300 },
+                    { week: '星期三', number: 28 },
+                    { week: '星期四', number: 200 },
+                    { week: '星期五', number: 74 },
+                    { week: '星期六', number: 532 },
+                    { week: '星期日', number: 420 },
+                ],
+            },
+        });
+    component.$inject(_app);
+</script>
+</body>
+</html>

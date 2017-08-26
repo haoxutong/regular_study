@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="regular_v5.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script id="template" type="text/regular">
+        <div>
+            <label>兴趣1:<input type="text" name="hobby"  r-model={fruit_one}></label>
+            <label>兴趣2<input type="text" name="hobby" r-model={fruit_two}></label>
+            <!-- <div class="input {dis== 'dis'? a:b}"></div>
+            <div class="{a == 'aaa'? 'b':'c'}">111</div> -->
+            <div>{names}</div>
+        </div>
+       <!--  <div>
+            {#list dataarray as data}
+            <div>{data.name}</div>
+            {/list}
+        </div>
+        <input type="text" name="name" r-model={name}>
+        <div>{allowSub}</div>
+        <button on-click={this.__add()}>点击age</button>
+        <button on-click={this.__addTotal()}>点击total</button> -->
+    </script>
+    <script type="text/javascript">
+    var HelloRegular = Regular.extend({
+      template: '#template',
+      config: function(){
+        this.data = {
+            // age: this.data.age || 0,
+            // total: this.data.total || 0,
+            // fruit: this.data.fruit || [],
+            fruit_one: '',
+            fruit_two: '',
+            names:['tome','aa','ss']
+        };
+      },
+      init: function(){
+        this.$watch('fruit_one && fruit_two',function(newValue){
+            // this.$emit('change',{
+            //     sender: this,
+            //     fruit: newValue,
+            // });
+            console.log(newValue);
+        });
+      },
+      computed:{
+        // allowSub: function(){
+        //     return this.data.name
+        // }
+      },
+      // __add: function(){
+      //   this.data.age = this.data.age + 1;
+      //   console.log(this.data.age);
+      // },
+      // __addTotal: function(){
+      //   this.data.total = this.data.total + 5;
+      //   console.log(this.data.total);
+      // }
+    });
+    var _model = new HelloRegular({data:{
+            fruit: '',
+            // dataarray:[],
+            // name:"tom",
+            // dis:'dis',
+            // a:'aaa',
+            // age:10,
+            // total: 100,
+        }}).$inject("#app");
+    _model.$on('change',function(newValue){
+        console.log('change', newValue);
+    });
+    // _model.$watch('name',function(newValue){
+    //     console.log(newValue);
+    // });
+    // _model.$watch(['age','total'],function(arg1,arg2,arg3,arg4){
+    //     console.log(arg1,arg2,arg3,arg4);
+    // })
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="regular_v5.js"></script>
+    <script id="template" type="text/regular">
+        <div>
+            <!-- <label><input type="checkbox" name="hobby" value="bala" r-model={fruit}>香蕉</label>
+            <label><input type="checkbox" name="hobby" value="apple" r-model={fruit}>苹果</label> -->
+            <div class="input"{#if attr}style="color:red"{/if}>{age}</div>
+            <div class="a">{total}</div>
+        </div>
+        <button {#if attr}on-click={this.__add()}{/if}>点击age</button>
+        <button on-click={this.__addTotal()}>点击total</button>
+    </script>
+    <script type="text/javascript">
+    var HelloRegular = Regular.extend({
+      template: '#template',
+      config: function(){
+        this.data = {
+            age: this.data.age || 0,
+            total: this.data.total || 0,
+            attr: true,
+        };
+      },
+      __add: function(){
+        this.data.age = this.data.age + 1;
+        console.log(this.data.age);
+      },
+      __addTotal: function(){
+        this.data.total = this.data.total + 5;
+        console.log(this.data.total);
+      },
+    });
+    new HelloRegular().$inject('#app');
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="regular-ui.default.min.css">
+    <!-- <script src="regular_v5.js"></script> -->
+</head>
+<body>
+    <div id="app">123</div>
+    <script type="text/javascript" src="regular.min.js"></script>
+    <script type="text/javascript" src="regular-ui.js"></script>
+    <script id="tem" type="text/regular">
+        <dateTimePicker minDate="2008-08-08 9:00" date="2008-09-02 8:00" maxDate="2008-09-12 14:45" />
+    </script>
+    <script type="text/javascript">
+    var _app = document.getElementById('app');
+    var component = new RGUI.Component({
+        template: "#tem",
+        data: {
+            // data: [
+            //     { week: '星期一', number: 150 },
+            //     { week: '星期二', number: 300 },
+            //     { week: '星期三', number: 28 },
+            //     { week: '星期四', number: 200 },
+            //     { week: '星期五', number: 74 },
+            //     { week: '星期六', number: 532 },
+            //     { week: '星期日', number: 420 },
+            //     { week: '星期一', number: 150 },
+            //     { week: '星期二', number: 300 },
+            //     { week: '星期三', number: 28 },
+            //     { week: '星期四', number: 200 },
+            //     { week: '星期五', number: 74 },
+            //     { week: '星期六', number: 532 },
+            //     { week: '星期日', number: 420 },
+            // ],
+        },
+    });
+        component.$inject(_app);
+    </script>
+</body>
+</html>

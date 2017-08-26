@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>饼图test</title>
+    <link rel="stylesheet" type="text/css" href="regular-ui.default.min.css">
+    <link rel="stylesheet" type="text/css" href="regular-ui-drag.css">
+</head>
+
+<body>
+    <div id="app">123</div>
+    <script type="text/javascript" src="regular.min.js"></script>
+    <!-- <script type="text/javascript" src="regular-ui.min.js"></script> -->
+    <script type="text/javascript" src="regular-ui-drag.js"></script>
+<script id="tem" type="text/regular">
+        <div class="g-row">
+            <div class="g-col g-col-6">
+                <droppable on-dragover={this._onListDragOver($event, {list: listA})}>
+                <ul class="m-listview m-listview-gutter">
+                    {#list listA as item}
+                        <droppable
+                            on-dragover={this._onDragOver($event, {list: listA})}>
+                        <draggable value={ @({item: item, list: listA}) }
+                            on-dragend={this._onDragEnd($event)}>
+                            <li><div>{item.text}</div></li>
+                        </draggable>
+                        </droppable>
+                    {/list}
+                </ul>
+                </droppable>
+            </div>
+            <div class="g-col g-col-6">
+                <droppable on-dragover={this._onListDragOver($event, {list: listB})}>
+                <ul class="m-listview m-listview-gutter">
+                    {#list listB as item}
+                        <droppable
+                            on-dragover={this._onDragOver($event, {list: listB})}>
+                        <draggable value={ @({item: item, list: listB}) }
+                            on-dragend={this._onDragEnd($event)}>
+                            <li><div>{item.text}</div></li>
+                        </draggable>
+                        </droppable>
+                    {/list}
+                </ul>
+                </droppable>
+            </div>
+        </div>
+</script>
+<script type="text/javascript">
+    var _app = document.getElementById('app');
+    let component = new RGUI2.Component({
+        template: '#tem',
+        data: {
+            listA: [
+                {text: '选项A1'},
+                {text: '选项A2'},
+                {text: '选项A3'},
+                {text: '选项A4'},
+                {text: '选项A5'},
+            ],
+            listB: [
+                {text: '选项B1'},
+                {text: '选项B2'},
+                {text: '选项B3'},
+                {text: '选项B4'},
+                {text: '选项B5'},
+            ],
+        },
+        _getElementIndex(element) {
+            return Array.prototype.indexOf.call(element.parentElement.children, element);
+        },
+        _onDragOver($event, tgt) {
+            let source = $event.source;
+            let target = $event.target;
+
+            // 排除source和target相同的情况
+            if(source === target)
+                return;
+            else
+                debugger;
+
+            let sourceParent = source.parentElement;
+            let targetParent = target.parentElement;
+            let sourceIndex = this._getElementIndex(source);
+            let targetIndex = this._getElementIndex(target);
+
+            // 删除起始元素
+            sourceParent.removeChild(source);
+
+            // 再将起始元素插入到新的位置
+            if(sourceIndex >= targetIndex || sourceParent !== targetParent)
+                targetParent.insertBefore(source, target);
+            else
+                targetParent.insertBefore(source, target.nextElementSibling);
+
+            // 记录目标列表
+            this.data.tgt = tgt;
+        },
+        _onListDragOver($event, tgt) {
+            let source = $event.source;
+            let sourceParent = source.parentElement;
+            let targetParent = $event.target;
+
+            // 删除起始元素
+            sourceParent.removeChild(source);
+            // 再将起始元素插入到新的位置
+            targetParent.appendChild(source);
+
+            this.data.tgt = tgt;
+        },
+        _onDragEnd($event) {
+            let src = $event.origin.data.value;
+            let tgt = this.data.tgt;
+            if(!tgt) return;
+
+            // 获取起始元素的初始位置
+            src.index = src.list.indexOf(src.item);
+            // 获取起始元素的结束位置
+            tgt.index = this._getElementIndex($event.source);
+
+            // 从起始列表中删除对象
+            src.list.splice(src.index, 1);
+            // 在目标列表中插入对象
+            tgt.list.splice(tgt.index, 0, src.item);
+        }
+    });
+    component.$inject(_app);
+</script>
+</body>
+</html>

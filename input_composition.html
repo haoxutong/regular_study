@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>componsitionstart/compositionend事件</title>
+</head>
+<body>
+<input type="text" id="person" />
+<script type="text/javascript">
+var node = document.querySelector('#person');
+var cpLock = false;
+node.addEventListener('compositionstart', function(){
+    cpLock = true;
+})
+node.addEventListener('compositionend', function(){
+    cpLock = false;
+})
+node.addEventListener('input', function(){
+    if(!cpLock)console.log(this.value);
+});
+</script>
+</body>
+</html>
